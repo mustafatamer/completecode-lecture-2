@@ -6,6 +6,7 @@ $name = $_POST['nameofgeom'];
 $stringgeom = $_POST['stringofgeom'];
 
 $add_query = "Insert into public.\"drawnFeature\" (type,name,geom) Values ('$type','$name',ST_GeomFromGeoJSON('$stringgeom'))";
+// $add_query = "Insert into public.\"deneme\" (name) Values ('deneme')";
 
 $query = pg_query($dbconn,$add_query);
 if ($query){

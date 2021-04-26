@@ -103,6 +103,18 @@ var featureLayersourse = new ol.source.TileWMS({
 var featureLayer = new ol.layer.Tile({
     source:featureLayersourse
 })
+
+// Geoserver Layer
+var featureLayersourse2 = new ol.source.TileWMS({
+    url:'http://localhost:8080/geoserver/topp/wms',
+    params:{'LAYERS':'topp:states', 'tiled' : true},
+    serverType:'geoserver'
+})
+var featureLayer2 = new ol.layer.Tile({
+    source:featureLayersourse2
+})
+
+
 // Draw vector layer
 // 1 . Define source
 var drawSource = new ol.source.Vector()
@@ -111,7 +123,7 @@ var drawLayer = new ol.layer.Vector({
     source : drawSource
 })
 // Layer Array
-var layerArray = [baseLayer,featureLayer,drawLayer]
+var layerArray = [baseLayer,featureLayer,drawLayer,featureLayer2]
 // Map
 var map = new ol.Map({
     controls: ol.control.defaults({
@@ -177,6 +189,7 @@ function defineTypeofFeature(){
 function savetodb(){
     // get array of all features 
     var featureArray = drawSource.getFeatures()
+    console.log(featureArray)
     // Define geojson format 
     var geogJONSformat = new ol.format.GeoJSON()
     // Use method to convert feature to geojson
